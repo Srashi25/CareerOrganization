@@ -40,7 +40,7 @@ public class OrganizationController {
 		}
 		//Rendering job_ info page
 				@RequestMapping(value="/org_info",method=RequestMethod.GET)
-				public ModelAndView job_info()
+				public ModelAndView org_info()
 				{
 					ModelAndView view=new ModelAndView("org_info");
 					return view;
