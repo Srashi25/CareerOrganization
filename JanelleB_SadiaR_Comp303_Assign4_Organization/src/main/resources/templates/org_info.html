@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>List of Available jobs</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="../static/css/styles.css" th:href="@{/css/styles.css}"
+	rel="stylesheet" />
+</head>
+<body class="container-fluid ">
+<div class="row d-flex justify-content-center">
+<div class="col-12 div-style bg-white" >
+	<h1 class="display-3 text-center" style="color:red">List of Organizations</h1>
+	<span class="padding d-flex justify-content-end"> <a th:href="add_org" class="btn btn-outline-success">Add Organization</a></span>
+	<div>
+	<table border="1" class="table table-striped">
+		<thead class="thead-dark">
+		<tr >
+			<th>Organization Id</th>
+			<th>Organization Name</th>
+			<th>Address</th>
+			<th>Postal Code</th>
+			<th>Phone No</th>
+			<th>Email</th>
+			<th>Web site</th>
+			<th></th>
+			<th></th>
+		</tr>
+		</thead>
+		<tbody><tr th:each="organization : ${orgList}">
+			<td th:text="${organization.orgId}">Organization Id</td>
+			<td th:text="${organization.orgName}">Organization Name</td>
+			<td th:text="${organization.address}">Address</td>
+			<td th:text="${organization.postalCode}">Postal Code</td>
+			<td th:text="${organization.phoneNo}">Phone No</td>
+			<td th:text="${organization.email}">Email</td>
+			<td th:text="${organization.website}">Web site</td>
+			<td> <a th:href="@{/update(orgId=${organization.orgId})}" class="btn btn-primary">Update</a></td>
+			<td> <a th:href="@{'delete/' + ${organization.orgId}}" class="btn btn-danger">Delete</a></td>
+		</tr></tbody>
+		
+	</table>
+	</div>
+		
+    <strong><a href="/" class="nav-link">Go back</a></strong>
+</div>
+
+</div>
+
+
+</body>
+</html>

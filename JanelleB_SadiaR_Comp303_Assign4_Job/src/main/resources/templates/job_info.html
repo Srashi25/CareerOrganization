@@ -4,7 +4,7 @@
 <meta charset="ISO-8859-1">
 <title>List of Available jobs</title>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"/>
-	<link href="../static/css/style.css" th:href="@{/css/styles.css}"
+	<link href="../static/css/styles.css" th:href="@{/css/styles.css}"
 	rel="stylesheet" />
 </head>
 <body class="container ">
@@ -32,7 +32,7 @@
 			<td th:text="${job.jobCode}">Job Code</td>
 			<td th:text="${job.jobName}">Job Name</td>
 			<td th:text="${job.jobDesc}">Job Description</td>
-			<td th:text="${job.pubDate}">Published Job</td>
+			<td th:text="${job.getDate(job.pubDate)}">Published Job</td>
 			<td th:text="${job.numVacancy}">No of Vacancies</td>
 			<td> <a th:href="@{/update(jobId=${job.jobId})}" class="btn btn-primary">Update</a></td>
 			<td> <a th:href="@{'delete/' + ${job.jobId}}" class="btn btn-danger">Delete</a></td>

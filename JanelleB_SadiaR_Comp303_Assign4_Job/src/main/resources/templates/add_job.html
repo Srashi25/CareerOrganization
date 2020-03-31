@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Add new Job</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="../static/css/styles.css" th:href="@{/css/styles.css}"
+	rel="stylesheet" />
+</head>
+<body class="container">
+<div class="row d-flex justify-content-center" >
+<div class="col-9 d-flex justify-content-center div-style">
+		<form action="display" method="post" >  
+        	<h1 class="display-3">Add a New Job</h1>
+            <table class="table table-hover">  
+                <tr class="form-group">  
+                    <td><label for="jobId">Job Id</label></td>  
+                    <td><input type="number" name="jobId" class="form-control" placeholder="Job Id e.g. 101" required min="1"/></td>  
+                </tr>
+                 <tr class="form-group">  
+                    <td><label for="jobCode">Job Code</label></td>  
+                    <td><input type="text" name="jobCode" class="form-control" placeholder="e.g CD-101" required/></td>  
+                </tr>  
+                <tr class="form-group">  
+                    <td><label for="jobName">Job Name</label></td>  
+                    <td><input type="text" name="jobName" class="form-control" placeholder="e.g  Proferssor" required/></td>  
+                </tr>  
+                <tr class="form-group">  
+                    <td><label for="jobDesc">Job Description</label></td>  
+                    <td><input type="text" name="jobDesc" class="form-control" placeholder="e.g Can teach a class.." required/></td>  
+                </tr>  
+               <tr class="form-group">  
+                    <td><label for="pubDate">Published Date</label></td>  
+                    <td><input type="date" name="pubDate" class="form-control" placeholder="e.g 2020-03-25" required/></td>  
+                </tr>  
+                  <tr class="form-group">  
+                    <td><label for="numVacancy">No of Vacancies</label></td>  
+                    <td><input type="number" name="numVacancy" class="form-control" placeholder="e.g 2" required min="1"/></td>  
+                </tr>  
+                <tr class="form-group">  
+                    <td></td>  
+                    <td><input type="submit" class="btn btn-danger"value="Add Job"/></td>  
+                </tr>  
+            </table>  
+            <strong><a href="/" class="nav-link">Go back</a></strong>
+        </form>  
+         
+</div>
+</div>
+
+</body>
+</html>

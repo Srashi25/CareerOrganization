@@ -1,5 +1,10 @@
 package com.spring.boot.microservice;
 
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,22 +14,22 @@ import javax.persistence.Table;
 @Table(name="job")
 public class Job {
 	@Id
-	@Column(name="jobId")
+	@Column(name="jobid")
 	private int jobId;
 	
-	@Column(name="jobCode")
+	@Column(name="jobcode")
 	private String jobCode;
 	
-	@Column(name="jobName")
+	@Column(name="jobname")
 	private String jobName;
 	
-	@Column(name="jobDesc")
+	@Column(name="jobdesc")
 	private String jobDesc;
 	
-	@Column(name="pubDate")
+	@Column(name="pubdate")
 	private String pubDate;
 	
-	@Column(name="numVacancy")
+	@Column(name="numvacancy")
 	private int numVacancy;
 	
 	
@@ -43,7 +48,7 @@ public class Job {
 		this.jobCode = jobCode;
 		this.jobName = jobName;
 		this.jobDesc = jobDesc;
-		this.pubDate = pubDate;
+		this.pubDate = getDate(pubDate);
 		this.numVacancy = numVacancy;
 	}
 	public String getJobCode() {
@@ -75,6 +80,12 @@ public class Job {
 	}
 	public void setNumVacancy(int numVacancy) {
 		this.numVacancy = numVacancy;
+	}
+	public String getDate(String pubDate) {
+		String pattern = "yyyy-MM-dd";
+		SimpleDateFormat simpleDateFormat =new SimpleDateFormat(pattern, new Locale("ca", "CA"));
+		String date = simpleDateFormat.format(new Date());
+		return date.toString();
 	}
 	
 }
