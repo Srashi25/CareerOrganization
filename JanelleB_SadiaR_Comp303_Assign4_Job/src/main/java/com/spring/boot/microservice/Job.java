@@ -1,37 +1,43 @@
 package com.spring.boot.microservice;
 
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
 
 @Entity
 @Table(name="job")
 public class Job {
 	@Id
+	@GeneratedValue (strategy = GenerationType.AUTO)
 	@Column(name="jobid")
 	private int jobId;
-	
+	@NotEmpty (message = "Job code is required.")
 	@Column(name="jobcode")
 	private String jobCode;
 	
+	@NotEmpty (message = "Job name is required.")
 	@Column(name="jobname")
 	private String jobName;
 	
+	@NotEmpty (message = "Job description is required.")
 	@Column(name="jobdesc")
 	private String jobDesc;
 	
+	@NotEmpty (message = "Pulished date is required.")
 	@Column(name="pubdate")
 	private String pubDate;
 	
+	@NotEmpty (message = "Number of vacancies is required.")
 	@Column(name="numvacancy")
 	private int numVacancy;
-	
 	
 	public Job() {
 		super();
