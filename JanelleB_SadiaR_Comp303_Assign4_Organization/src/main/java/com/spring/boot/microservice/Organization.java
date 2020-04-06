@@ -2,23 +2,34 @@ package com.spring.boot.microservice;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
+
 
 @Entity
 @Table(name="organization")
 public class Organization {
 	
 	@Id
+	@GeneratedValue (strategy = GenerationType.AUTO)
 	@Column(name="orgid")
 	private int orgId;
 	
+	@NotEmpty (message = "Organization Name is")
 	@Column(name="orgname")
 	private String orgName;
 	
+	@Length (min=20,max=100,message = "Address cannot be null.")
 	@Column(name="address")
 	private String address;
 	
+	@Pattern( regexp="^\\(?(\\ d{3}\\)?[- ]?(\\d{3})[- ]?(\\d{4 })$", message ="Phone number is invalid")
 	@Column(name="postalcode")
 	private String postalCode;
 	

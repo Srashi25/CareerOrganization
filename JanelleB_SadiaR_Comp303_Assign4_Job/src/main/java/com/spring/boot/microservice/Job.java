@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Length;
+
 
 @Entity
 @Table(name="job")
@@ -27,7 +29,7 @@ public class Job {
 	@Column(name="jobname")
 	private String jobName;
 	
-	@NotEmpty (message = "Job description is required.")
+	@Length (min=10,max=2000,message = "Job description is required.")
 	@Column(name="jobdesc")
 	private String jobDesc;
 	
