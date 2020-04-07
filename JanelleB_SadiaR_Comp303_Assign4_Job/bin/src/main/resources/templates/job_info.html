@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>List of Available jobs</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="../static/css/styles.css" th:href="@{/css/styles.css}"
+	rel="stylesheet" />
+</head>
+<body class="container ">
+<div class="row d-flex justify-content-center">
+<div class="col-12 div-style bg-white" >
+	<h1 class="display-3 text-center" style="color:red">List of Jobs</h1>
+	<span class="padding d-flex justify-content-end"> <a th:href="add_job" class="btn btn-outline-success">Add Job</a></span>
+	<div>
+	<table border="1" class="table table-striped">
+		<thead class="thead-dark">
+		<tr >
+			<th>Job Id</th>
+			<th>Job Code</th>
+			<th>Job Name</th>
+			<th>Job Description</th>
+			<th>Published Date</th>
+			<th>No on Vacancies</th>
+			<th></th>
+			<th></th>
+		</tr>
+		</thead>
+		<tbody><tr th:each="job : ${jobList}">
+		
+			<td th:text="${job.jobId}">Job Id</td>
+			<td th:text="${job.jobCode}">Job Code</td>
+			<td th:text="${job.jobName}">Job Name</td>
+			<td th:text="${job.jobDesc}">Job Description</td>
+			<td th:text="${job.getDate(job.pubDate)}">Published Job</td>
+			<td th:text="${job.numVacancy}">No of Vacancies</td>
+			<td> <a th:href="@{/update(jobId=${job.jobId})}" class="btn btn-primary">Update</a></td>
+			<td> <a th:href="@{'delete/' + ${job.jobId}}" class="btn btn-danger">Delete</a></td>
+		</tr></tbody>
+		
+	</table>
+	</div>
+		
+    <strong><a href="/" class="nav-link">Go back</a></strong>
+</div>
+
+</div>
+
+
+</body>
+</html>
