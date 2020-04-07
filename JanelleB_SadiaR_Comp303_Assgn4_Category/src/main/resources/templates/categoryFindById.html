@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Category - Find By ID</title>
+</head>
+<body>
+<form action="#" th:action="@{/category/findById}" th:object="${category}" method="post">
+					<span>
+						Find Job Category By ID
+					</span>
+
+					<div> Job Category ID:
+						<input type="text" name="jobCatId" id="jobCatId" />
+					</div>
+					
+
+					<button> FIND CATEGORY </button>
+				</form>
+</body>
+</html>

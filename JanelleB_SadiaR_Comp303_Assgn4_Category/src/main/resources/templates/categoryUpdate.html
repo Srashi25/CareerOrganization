@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Category - Update</title>
+</head>
+<body>
+<form action="#" th:action="@{'/category/update/{jobCatId}'(jobCatId=${jobCatId})}" th:object="${category}" th:method="POST">
+					<span>
+						Update Category Information
+					</span>
+
+					<div> Job Category ID:
+						<input type="number" name="jobCatId" th:value="${jobCatId}" readonly>
+					</div>
+					
+					<div> Category Code:
+						<input type="text" th:field="*{catCode}" />
+						<span th:if="${#fields.hasErrors('catCode')}" th:errors="*{catCode}"></span>
+					</div>
+					
+					<div>
+						<input type="text" th:field="*{catName}" />
+						<span th:if="${#fields.hasErrors('catName')}" th:errors="*{catName}"></span>
+					</div>
+					
+					<div>
+						<input type="text" th:field="*{catDesc}" />
+						<span th:if="${#fields.hasErrors('catDesc')}" th:errors="*{catDesc}"></span>
+					</div>
+
+					<button> UPDATE CATEGORY </button>
+					
+				</form>
+</body>
+</html>
