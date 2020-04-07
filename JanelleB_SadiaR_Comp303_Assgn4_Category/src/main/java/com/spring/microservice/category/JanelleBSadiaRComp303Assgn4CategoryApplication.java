@@ -8,6 +8,7 @@ public class JanelleBSadiaRComp303Assgn4CategoryApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(JanelleBSadiaRComp303Assgn4CategoryApplication.class, args);
+		System.out.println("Category Microservice has started");
 	}
 
 }

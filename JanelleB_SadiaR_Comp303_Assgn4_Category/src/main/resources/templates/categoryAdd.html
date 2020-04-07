@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Category - Add</title>
+</head>
+<body>
+<form action="#" th:action="@{/category/show}" th:object="${category}" method="post">
+					<span>
+						Job Category Information Form
+					</span>
+
+					<div>
+						<input type="text" th:field="*{catCode}" />
+						<span th:if="${#fields.hasErrors('catCode')}" th:errors="*{catCode}"></span>
+					</div>
+
+					<div>
+						<input type="text" th:field="*{catName}" />
+						<span th:if="${#fields.hasErrors('catName')}" th:errors="*{catName}"></span>
+					</div>
+					
+					<div>
+						<input type="text" th:field="*{catDesc}" />
+						<span th:if="${#fields.hasErrors('catDesc')}" th:errors="*{catDesc}"></span>
+					</div>
+
+					<button> ADD CATEGORY </button>
+				</form>
+</body>
+</html>
