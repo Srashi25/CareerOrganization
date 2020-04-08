@@ -28,29 +28,27 @@ public class Organization {
 	private String orgName;
 	
 	@NotNull(message="Please add address.")
-	@Length (min=20,max=100,message = "Address should be between 20-100 characters.")
+	@Length (min=10,max=100,message = "Address should be between 20-100 characters.")
 	@Column(name="address")
 	private String address;
 	
 	@NotNull(message="Please add postal code.")
-	@Pattern( regexp="^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$", message ="Postal code is invalid.")
+	@Pattern(regexp="^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]●?[0-9][A-Z][0-9]$", message ="Postal code is invalid.")
 	@Column(name="postalcode")
 	private String postalCode;
 	
 	@NotNull(message="Please add phone number.")
-	@Pattern( regexp="^\\(?(\\ d{3}\\)?[- ]?(\\d{3})[- ]?(\\d{4 })$", message ="Phone number is invalid")
+	@Pattern(regexp="^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$", message="Phone number is invalid")
 	@Column(name="phoneno")
 	private String phoneNo;
 	
 	@NotNull(message="Please add email.")
-	@Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
-			+"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
-			+"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
-			message="{invalid.email}")
+	//@Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+			//message="{invalid.email}")
 	@Column(name="email")
 	private String email;
 	
-	 @URL(regexp = "^(http|ftp).*")
+	// @URL(regexp = "^(http|ftp).*")
 	@Column(name="website")
 	private String website;
 	

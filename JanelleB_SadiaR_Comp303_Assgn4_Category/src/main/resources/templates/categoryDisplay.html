@@ -138,7 +138,7 @@
 				</form>
               </div>
               
-              <div class="cell-1" data-title="Update">
+              <div class="cell-1" data-title="Delete">
               	<form action="#" th:action="@{'/category/delete/{jobCatId}'(jobCatId=${cat.jobCatId})}" th:method="POST"> 	
 					<input type="hidden" name="_method" value="delete" />
   					<button type="submit" id="submitButton" class="btn btn-danger btn-sm text-white" >DELETE</button>

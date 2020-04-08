@@ -1,37 +1,186 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
-<head>
-<meta charset="ISO-8859-1">
-<title>Job - Add</title>
-</head>
-<body>
-	<form action="#" th:action="@{/job/show}"
-		th:object="${job}" method="post">
-		<span> Job Information Form </span>
+  <head>
+  	<title>Job - Add</title>
+    <meta charset="ISO-8859-1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Free-Template.co" />
+    <link rel="shortcut icon" href="ftco-32x32.png">
+    
+    <link rel="stylesheet" th:href="@{/css/custom-bs.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery.fancybox.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap-select.min.css}">
+    <link rel="stylesheet" th:href="@{/fonts/icomoon/style.css}">
+    <link rel="stylesheet" th:href="@{/fonts/line-icons/style.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.min.css}">
 
-		<div>
-			<input type="text" th:field="*{jobCode}" /> <span
-				th:if="${#fields.hasErrors('jobCode')}" th:errors="*{jobCode}"></span>
-		</div>
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}"> 
+       
+  </head>
+  <body id="top">
 
-		<div>
-			<input type="text" th:field="*{jobName}" /> <span
-				th:if="${#fields.hasErrors('jobName')}" th:errors="*{jobName}"></span>
-		</div>
-		<div>
-			<input type="text" th:field="*{jobDesc}" /> <span
-				th:if="${#fields.hasErrors('jobDesc')}" th:errors="*{jobDesc}"></span>
-		</div>
-		<div>
-			<input type="date" th:field="*{pubDate}" /> <span
-				th:if="${#fields.hasErrors('pubDate')}" th:errors="*{pubDate}"></span>
-		</div>
-		<div>
-			<input type="text" th:field="*{numVacancy}" /> <span
-				th:if="${#fields.hasErrors('numVacancy')}" th:errors="*{numVacancy}"></span>
-		</div>
-		
-		<button>ADD JOB</button>
-	</form>
-</body>
+  <div id="overlayer"></div>
+  <div class="loader">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+    
+
+<div class="site-wrap">
+
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+    
+
+    <!-- NAVBAR -->
+    <header class="site-navbar mt-3">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="site-logo col-6"><a href="#">Job Board</a></div>
+
+          <nav class="mx-auto site-navigation">
+            <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
+              <li><a href="#">Home</a></li>
+              <li class="has-children">
+                <a href="/" class="nav-link active">Organization</a>
+                <ul class="dropdown">
+                  <li><a href="show">List All Organization</a></li>
+                  <li><a href="findById">Find An Organization</a></li>
+                  <li><a href="add">Add Organization</a></li>
+                </ul>
+              </li>
+              <li class="has-children">
+                <a href="job-listings.html">Category</a>
+                <ul class="dropdown">
+                  <li><a href="job-single.html">List All Categories</a></li>
+                  <li><a href="post-job.html">Find A Category</a></li>
+                  <li><a href="post-job.html">Add Category</a></li>
+                </ul>
+              </li>
+              <li class="has-children">
+                <a href="job-listings.html">Job</a>
+                <ul class="dropdown">
+                  <li><a href="job-single.html">List All Jobs</a></li>
+                  <li><a href="post-job.html">Find A Job</a></li>
+                  <li><a href="post-job.html">Add Job</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- HOME -->
+    <section class="section-hero overlay inner-page bg-image" th:style="'background-image: url(' + @{/images/hero_1.jpg} + ');'" id="home-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7">
+            <h1 class="text-white font-weight-bold">Add A Job</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-section" id="next-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <form action="#" th:action="@{/job/show}" th:object="${job}" method="post" class="">
+
+              <div class="row form-group">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label class="text-black" for="jobCode">Job Code</label>
+                  <input type="text" id="jobCode" class="form-control" th:field="*{jobCode}" />
+                  <span class="text-red" th:if="${#fields.hasErrors('jobCode')}" th:errors="*{jobCode}"></span>
+                </div>
+              </div>
+
+             <div class="row form-group">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label class="text-black" for="jobName">Job Name</label>
+                  <input type="text" id="jobName" class="form-control" th:field="*{jobName}" />
+                  <span class="text-red" th:if="${#fields.hasErrors('jobName')}" th:errors="*{jobName}"></span>
+                </div>
+              </div>
+			<div class="row form-group">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label class="text-black" for="jobDesc">Job Description</label>
+                  <input type="text" id="jobDesc" class="form-control" th:field="*{jobDesc}" />
+                  <span class="text-red" th:if="${#fields.hasErrors('jobDesc')}" th:errors="*{jobDesc}"></span>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label class="text-black" for="pubDate">Published Date</label>
+                  <input type="date" id="pubDate" class="form-control" th:field="*{pubDate}" />
+                  <span class="text-red" th:if="${#fields.hasErrors('pubDate')}" th:errors="*{pubDate}"></span>
+                </div>
+              </div>
+               <div class="row form-group">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label class="text-black" for="numVacancy">Number of Vacancies</label>
+                  <input type="text" id="numVacancy" class="form-control" th:field="*{numVacancy}" />
+                  <span class="text-red" th:if="${#fields.hasErrors('numVacancy')}" th:errors="*{numVacancy}"></span>
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <input type="submit" value="Add Job" class="btn btn-primary btn-md text-white">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <footer class="site-footer">
+
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-12">
+            <p class="copyright"><small>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></small></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  
+  </div>
+
+    <!-- SCRIPTS -->
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/isotope.pkgd.min.js}"></script>
+    <script th:src="@{/js/stickyfill.min.js}"></script>
+    <script th:src="@{/js/jquery.fancybox.min.js}"></script>
+    <script th:src="@{/js/jquery.easing.1.3.js}"></script>
+    
+    <script th:src="@{/js/jquery.waypoints.min.js}"></script>
+    <script th:src="@{/js/jquery.animateNumber.min.js}"></script>
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    
+    <script th:src="@{/js/bootstrap-select.min.js}"></script>
+    
+    <script th:src="@{/js/custom.js}"></script>
+
+     
+  </body>
 </html>

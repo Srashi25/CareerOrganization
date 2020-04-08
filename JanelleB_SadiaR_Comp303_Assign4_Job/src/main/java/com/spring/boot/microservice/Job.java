@@ -1,7 +1,10 @@
 package com.spring.boot.microservice;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,10 +41,8 @@ public class Job {
 	private String jobDesc;
 	
 	@NotNull (message = "Pulished date is required.")
-	@CreationTimestamp
-	@Temporal(TemporalType.DATE)
 	@Column(name="pubdate")
-	private Date pubDate;
+	private String pubDate;
 	
 	@NotNull (message = "Number of vacancies is required.")
 	@Column(name="numvacancy")
@@ -56,7 +57,7 @@ public class Job {
 	public void setJobId(int jobId) {
 		this.jobId = jobId;
 	}
-	public Job(int jobId, String jobCode, String jobName, String jobDesc, Date pubDate, int numVacancy) {
+	public Job(int jobId, String jobCode, String jobName, String jobDesc, String pubDate, int numVacancy) {
 		super();
 		this.jobId = jobId;
 		this.jobCode = jobCode;
@@ -83,10 +84,10 @@ public class Job {
 	public void setJobDesc(String jobDesc) {
 		this.jobDesc = jobDesc;
 	}
-	public Date getPubDate() {
+	public String getPubDate() {
 		return pubDate;
 	}
-	public void setPubDate(Date pubDate) {
+	public void setPubDate(String pubDate) {
 		this.pubDate = pubDate;
 	}
 	public int getNumVacancy() {
@@ -95,12 +96,12 @@ public class Job {
 	public void setNumVacancy(int numVacancy) {
 		this.numVacancy = numVacancy;
 	}
-//	public String getDate(String pubDate) {
-//		String pattern = "yyyy-MM-dd";
-//		SimpleDateFormat simpleDateFormat =new SimpleDateFormat(pattern, new Locale("ca", "CA"));
-//		String date = simpleDateFormat.format(new Date());
-//		return date.toString();
-//	}
+	public String getDate(String pubDate) {
+		String pattern = "yyyy-MM-dd";
+		SimpleDateFormat simpleDateFormat =new SimpleDateFormat(pattern, new Locale("ca", "CA"));
+		String date = simpleDateFormat.format(new Date());
+		return date.toString();
+	}
 	
 }
 

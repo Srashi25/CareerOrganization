@@ -48,7 +48,7 @@
     <header class="site-navbar mt-3">
       <div class="container-fluid">
         <div class="row align-items-center">
-          <div class="site-logo col-6"><a href="#">OrganizationBoard</a></div>
+          <div class="site-logo col-6"><a href="#">Job Board</a></div>
 
           <nav class="mx-auto site-navigation">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
@@ -131,13 +131,13 @@
             </div>
 
             <div th:each="org : ${organization}" class="row-1">
-              <div class="cell-1" data-title="Organization Id" th:text="${org.oegId}">
+              <div class="cell-1" data-title="Organization Id" th:text="${org.orgId}">
               </div>
               <div class="cell-1" data-title="Organization Name" th:text="${org.orgName}">
               </div>
-              <div class="cell-1" data-title="Address" th:text="${org.Address}">
+              <div class="cell-1" data-title="Address" th:text="${org.address}">
               </div>
-              <div class="cell-1" data-title="Postal Code" th:text="$or.postalCoed}">
+              <div class="cell-1" data-title="Postal Code" th:text="${org.postalCode}">
               </div>
                <div class="cell-1" data-title="Phone No" th:text="${org.phoneNo}">
               </div>

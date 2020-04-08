@@ -48,7 +48,7 @@
     <header class="site-navbar mt-3">
       <div class="container-fluid">
         <div class="row align-items-center">
-          <div class="site-logo col-6"><a href="#">Organization Board</a></div>
+          <div class="site-logo col-6"><a href="#">Job Board</a></div>
 
           <nav class="mx-auto site-navigation">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
@@ -103,7 +103,7 @@
               <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
                   <label class="text-black" for="orgName">Organization Name</label>
-                  <input type="text" id="orgName" class="form-control" th:field="*{orgName}" />
+                  <input type="text" id="orgName" class="form-control" th:field="*{orgName}" placeholder="abcCompany"/>
                   <span class="text-red" th:if="${#fields.hasErrors('orgName')}" th:errors="*{orgName}"></span>
                 </div>
               </div>
@@ -111,15 +111,36 @@
              <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
                   <label class="text-black" for="address">Address</label>
-                  <input type="text" id="address" class="form-control" th:field="*{address}" />
+                  <input type="text" id="address" class="form-control" th:field="*{address}"  placeholder="123 Street"/>
                   <span class="text-red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
                 </div>
               </div>
 			<div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
-                  <label class="text-black" for="orgName">Postal Code</label>
-                  <input type="text" id="postalCode" class="form-control" th:field="*{postalCode}" />
+                  <label class="text-black" for="postalCode">Postal Code</label>
+                  <input type="text" id="postalCode" class="form-control" th:field="*{postalCode}"  placeholder="A0A0A0"/>
                   <span class="text-red" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></span>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label class="text-black" for="phoneNo">Phone No</label>
+                  <input type="text" id="phoneNo" class="form-control" th:field="*{phoneNo}"  placeholder="(416)111-1234"/>
+                  <span class="text-red" th:if="${#fields.hasErrors('phoneNo')}" th:errors="*{phoneNo}"></span>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label class="text-black" for="email">Email</label>
+                  <input type="text" id="email" class="form-control" th:field="*{email}"  placeholder="example@example.com"/>
+                  <span class="text-red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label class="text-black" for="website">Web site</label>
+                  <input type="text" id="website" class="form-control" th:field="*{website}"  placeholder="www.abc.com"/>
+                  <span class="text-red" th:if="${#fields.hasErrors('website')}" th:errors="*{website}"></span>
                 </div>
               </div>
 
