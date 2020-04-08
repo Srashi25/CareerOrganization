@@ -27,14 +27,11 @@
 				th:if="${#fields.hasErrors('pubDate')}" th:errors="*{pubDate}"></span>
 		</div>
 		<div>
-			<input type="text" th:field="*{email}" /> <span
-				th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+			<input type="text" th:field="*{numVacancy}" /> <span
+				th:if="${#fields.hasErrors('numVacancy')}" th:errors="*{numVacancy}"></span>
 		</div>
-		<div>
-			<input type="text" th:field="*{website}" /> <span
-				th:if="${#fields.hasErrors('website')}" th:errors="*{website}"></span>
-		</div>
-		<button>ADD ORGANIZATION</button>
+		
+		<button>ADD JOB</button>
 	</form>
 </body>
 </html>
