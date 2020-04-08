@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Job - Add</title>
+</head>
+<body>
+	<form action="#" th:action="@{/job/show}"
+		th:object="${job}" method="post">
+		<span> Job Information Form </span>
+
+		<div>
+			<input type="text" th:field="*{jobCode}" /> <span
+				th:if="${#fields.hasErrors('jobCode')}" th:errors="*{jobCode}"></span>
+		</div>
+
+		<div>
+			<input type="text" th:field="*{jobName}" /> <span
+				th:if="${#fields.hasErrors('jobName')}" th:errors="*{jobName}"></span>
+		</div>
+		<div>
+			<input type="text" th:field="*{jobDesc}" /> <span
+				th:if="${#fields.hasErrors('jobDesc')}" th:errors="*{jobDesc}"></span>
+		</div>
+		<div>
+			<input type="date" th:field="*{pubDate}" /> <span
+				th:if="${#fields.hasErrors('pubDate')}" th:errors="*{pubDate}"></span>
+		</div>
+		<div>
+			<input type="text" th:field="*{email}" /> <span
+				th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+		</div>
+		<div>
+			<input type="text" th:field="*{website}" /> <span
+				th:if="${#fields.hasErrors('website')}" th:errors="*{website}"></span>
+		</div>
+		<button>ADD ORGANIZATION</button>
+	</form>
+</body>
+</html>

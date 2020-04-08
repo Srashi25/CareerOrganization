@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Organization - Find By ID</title>
+</head>
+<body>
+<form action="#" th:action="@{/organization/findById}" th:object="${organization}" method="post">
+					<span>
+						Find Organization By ID
+					</span>
+
+					<div> Organization ID:
+						<input type="text" name="orgId" id="orgId" />
+					</div>
+					
+					<button> FIND ORGANIZATION </button>
+				</form>
+</body>
+</html>

@@ -2,6 +2,8 @@ package com.spring.boot.microservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -63,155 +65,134 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-
+@RequestMapping("job")
 @Controller
 public class JobController {
 	@Autowired
-    JobRepository jobRepository;
-	List<Job> findJobs = new ArrayList<Job>();
-	
-	// Rendering Index page
+    JobService jobService;
 
+	// Rendering Index page
 	@RequestMapping("/")
 	public String home()
 	{
 		return "index";
 	}
-	//Rendering add_job page
-		@RequestMapping(value="/add_job",method=RequestMethod.GET)
-		public ModelAndView add_job()
-		{
-			ModelAndView view=new ModelAndView("add_job");
-			return view;
-		}
-		//Rendering job_ info page
-				@RequestMapping(value="/job_info",method=RequestMethod.GET)
-				public ModelAndView job_info()
-				{
-					ModelAndView view=new ModelAndView("job_info");
-					return view;
-				}
-				//Rendering contact page
-						@RequestMapping(value="/contact",method=RequestMethod.GET)
-						public ModelAndView contact()
-						{
-							ModelAndView view=new ModelAndView("contact");
-							return view;
-						}
 	
-	// accessing specific job 
- @RequestMapping(value = "/job/{jobId}", method = RequestMethod.GET)
- Job getJob(@PathVariable("jobId") int jobId) throws Exception {
-     return jobRepository.getOne(jobId);
- }
-
- // Getting the list of jobs 
- @RequestMapping(value = "/jobs", method = RequestMethod.GET)
- Iterable<Job> getJobs() {
-     return jobRepository.findAll();
- }
- // Rendering display page 
- @RequestMapping(value = "/display", method = RequestMethod.GET)
- public ModelAndView getJobList()
- {
-     ModelAndView mv = new ModelAndView();
-     mv.setViewName("job_info");
-     mv.addObject("jobList",jobRepository.findAll());
-     return mv;
- }
- // Adding a job into jobService
- @RequestMapping(value = "/job", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
- @ResponseStatus(value = HttpStatus.OK)
- void addJob(@RequestBody Job job) throws Exception {
-	 jobRepository.save(job);
-     
- }
-
- // Saving the job consuming API
- @RequestMapping(value = "/display", method = RequestMethod.POST)
- public ModelAndView saveJob(@ModelAttribute Job job) throws Exception
- {
-     ModelAndView mv = new ModelAndView();
-     mv.setViewName("job_info");
-     jobRepository.save(job);
-     mv.addObject("jobList",jobRepository.findAll());
-     return mv;
- }
- //
- @RequestMapping(value="find_job", produces=MediaType.TEXT_PLAIN_VALUE)
- @ResponseBody
- public ModelAndView findJob(@RequestParam("jobTitle") String jobTitle) throws Exception {
-	 findJobs.clear();
-	 System.out.println("job Title"+jobTitle.toUpperCase());
-	 ModelAndView mv = new ModelAndView();
-     for(Job job:jobRepository.findAll()) {
-    	 String name=job.getJobName().toUpperCase();
-    	 System.out.println("job name"+name);
-    	 if(name.equals(jobTitle.toUpperCase())) {
-    		 findJobs.add(job);
-    	 }
-     }
-     mv.setViewName("job_info");
-     mv.addObject("jobList",findJobs);
-     return mv;
- }
-
- // Getting the jobId and update the job object 
- @RequestMapping(value = "/job/{jobId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
- @ResponseStatus(value = HttpStatus.OK)
- void updateJob(@PathVariable("jobId") int jobId, @RequestBody Job job) throws Exception {
-    job.setJobId(jobId);
-    jobRepository.save(job);
- }
-
- // Rendering update_job page and displaying job object info on the page. 
- @RequestMapping(value = "update",params = "jobId", method = RequestMethod.GET)
- public ModelAndView getUpdateJob(@RequestParam("jobId") int jobId) throws Exception
- {
-     ModelAndView mv = new ModelAndView();
-     mv.setViewName("update_job");
-     mv.addObject("job",jobRepository.findById(jobId));
-     return mv;
- }
- 
- //Accepting the requested from and updating  the job and redirecting to jobList page
- @RequestMapping(value = "update", method = RequestMethod.POST)
- public ModelAndView updateJob(@ModelAttribute Job job) throws Exception
- {
-     ModelAndView mv = new ModelAndView();
-     mv.setViewName("job_info");
-     jobRepository.save(job);
-     mv.addObject("jobList",jobRepository.findAll());
-     return mv;
- }
- //getting jobId and Deleting object from jobRepo
-
- @RequestMapping(value = "/job/{jobId}", method = RequestMethod.DELETE)
- @ResponseStatus(value = HttpStatus.OK)
- void deleteJob(@PathVariable("jobId") int jobId) throws Exception {
-	 jobRepository.deleteById(jobId);
- }
- 
- //Receiving the request of deleting the object, receiving the Id of the object to delete and redirecting to jobList page
- @RequestMapping(value = "/delete/{jobId}", method = RequestMethod.GET)
- public ModelAndView getDeleteJob(@PathVariable("jobId") int jobId) throws Exception
- {
-     ModelAndView mv = new ModelAndView();
-     mv.setViewName("job_info");
-     jobRepository.deleteById(jobId);
-     mv.addObject("jobList",jobRepository.findAll());
-     return mv;
- }
+	@RequestMapping("/show")
+	public String show(Model model)
+	{
+		model.addAttribute("job", jobService.getAll());
+		return "jobDisplay";
+	}
+	
+	// Getting all the organizations
+	@PostMapping("/show")
+	public String add(@Valid Job job, BindingResult result, Model model)
+	{
+		if (result.hasErrors()) {
+			return "jobAdd";
+		}
+		
+		jobService.saveJob(job);
+		model.addAttribute("job", jobService.getAll());
+		return "jobDisplay";
+	}
+	
+	
+	// Finding an organization by id
+	@PostMapping("/findById")
+	public @ResponseBody ModelAndView findById(@RequestParam("jobId") int jobId, Model model, RedirectAttributes redirect)
+	{
+		ModelAndView mv = new ModelAndView();
+		
+		if (jobService.getJobById(jobId).isPresent())
+		{
+			Job job = jobService.getJobById(jobId).get();
+			List<Job> jobList = new ArrayList<>();
+			jobList.add(job);
+			mv.setViewName("jobDisplay");
+			mv.addObject("job", jobList);
+			return mv;
+		}
+		
+		redirect.addFlashAttribute("message", "Job not found!");
+		mv.setViewName("redirect:/");
+		return mv;
+	}
+	
+	// Handling Delete 
+	@PostMapping("/delete/{jobId}")
+	public String delete(@PathVariable("jobId") int jobId, Model model)
+	{
+		if (jobService.getJobById(jobId).isPresent())
+		{
+			jobService.deleteJob(jobId);
+			model.addAttribute("job", jobService.getAll());
+			return "jobDisplay";
+		}
+		
+		model.addAttribute("message", "Job not found!");
+		return "index";
+	}
+	
+	
+	// Handling post update
+	@PostMapping("/update/{jobId}")
+	public String update(@PathVariable("jobId") int jobId, @Valid Job job, BindingResult result, Model model)
+	{	
+		if (jobService.getJobById(jobId).isPresent()) {
+			
+			if (result.hasErrors()) {
+				return "jobUpdate";
+			}
+			
+			jobService.updateJob(jobId, job);
+			model.addAttribute("job", jobService.getAll());
+			return "jobDisplay";
+		} 
+		
+		model.addAttribute("message", "Job not found!");
+		return "index";
+	}
+	
+	
+	//Rendering Update Page
+	@GetMapping("/update/{jobId}")
+	public String renderUpdate(@PathVariable("jobId") int jobId, Job job, Model model)
+	{
+		model.addAttribute("jobId", jobId);
+		return "jobUpdate"; 
+	}
+	
+	// Rendering add a job page
+	@GetMapping("/add")
+	public String renderAdd(Job job) {
+		return "jobAdd";
+	}
+	
+	//Rendering find a job page
+	@GetMapping("/findById")
+	public String renderFindById()
+	{
+		return "jobFindById";
+	}
+	
 }
 
 

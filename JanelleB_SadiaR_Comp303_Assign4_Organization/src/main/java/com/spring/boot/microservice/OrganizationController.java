@@ -3,12 +3,18 @@ package com.spring.boot.microservice;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,143 +22,117 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+@RequestMapping("organization")
 @Controller
 public class OrganizationController {
 	@Autowired
-	OrganizationRepository organizationRepository;
-	List<Organization> findOrganization = new ArrayList<Organization>();
+	OrganizationService organizationService;
 
 	// Rendering Index page
-
 	@RequestMapping("/")
 	public String home() {
 		return "index";
 	}
-
-	// Rendering add_job page
-	@RequestMapping(value = "/add_org", method = RequestMethod.GET)
-	public ModelAndView add_org() {
-		ModelAndView view = new ModelAndView("add_org");
-		return view;
+	
+	@RequestMapping("/show")
+	public String show(Model model)
+	{
+		model.addAttribute("organization", organizationService.getAll());
+		return "orgDisplay";
 	}
-
-	// Rendering job_ info page
-	@RequestMapping(value = "/org_info", method = RequestMethod.GET)
-	public ModelAndView org_info() {
-		ModelAndView view = new ModelAndView("org_info");
-		return view;
-	}
-
-	// Rendering contact page
-	@RequestMapping(value = "/contact", method = RequestMethod.GET)
-	public ModelAndView contact() {
-		ModelAndView view = new ModelAndView("contact");
-		return view;
-	}
-
-	// accessing specific job
-	@RequestMapping(value = "/org/{orgId}", method = RequestMethod.GET)
-	Organization getOrganization(@PathVariable("orgId") int orgId) throws Exception {
-		return organizationRepository.getOne(orgId);
-	}
-
-	// Getting the list of organizations
-	@RequestMapping(value = "/organizations", method = RequestMethod.GET)
-	Iterable<Organization> getOrganizations() {
-		return organizationRepository.findAll();
-	}
-
-	// Rendering display page
-	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView getOrganizationList() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("org_info");
-		mv.addObject("orgList", organizationRepository.findAll());
-		return mv;
-	}
-
-	// Adding a organization into OrgRepo
-	@RequestMapping(value = "/org", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseStatus(value = HttpStatus.OK)
-	void addOrganization(@RequestBody Organization organization) throws Exception {
-		organizationRepository.save(organization);
-
-	}
-
-	// Saving the organization consuming API
-	@RequestMapping(value = "/display", method = RequestMethod.POST)
-	public ModelAndView saveJob(@ModelAttribute Organization organization) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("org_info");
-		organizationRepository.save(organization);
-		mv.addObject("orgList", organizationRepository.findAll());
-		return mv;
-	}
-
-	// Finding an Organization with Organization Name
-	@RequestMapping(value = "find_org", produces = MediaType.TEXT_PLAIN_VALUE)
-	@ResponseBody
-	public ModelAndView findJob(@RequestParam("orgName") String orgName) throws Exception {
-		findOrganization.clear();
-		System.out.println("Organization name " + orgName.toUpperCase());
-		ModelAndView mv = new ModelAndView();
-		for (Organization organization : organizationRepository.findAll()) {
-			String name = organization.getOrgName().toUpperCase();
-			System.out.println("Org name" + name);
-			if (name.equals(orgName.toUpperCase())) {
-				findOrganization.add(organization);
-			}
+	
+	// Getting all the organizations
+	@PostMapping("/show")
+	public String add(@Valid Organization organization, BindingResult result, Model model)
+	{
+		if (result.hasErrors()) {
+			return "orgAdd";
 		}
-		mv.setViewName("org_info");
-		mv.addObject("orgList", findOrganization);
-		return mv;
+		
+		organizationService.saveOrganization(organization);
+		model.addAttribute("organization", organizationService.getAll());
+		return "orgDisplay";
 	}
-
-	// Getting the orgId and update the organization object
-	@RequestMapping(value = "/organization/{orgId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseStatus(value = HttpStatus.OK)
-	void updateOrganization(@PathVariable("orgId") int orgId, @RequestBody Organization organization) throws Exception {
-		organization.setOrgId(orgId);
-		organizationRepository.save(organization);
-	}
-
-	// Rendering update_org page and displaying org object info on the page.
-	@RequestMapping(value = "update", params = "orgId", method = RequestMethod.GET)
-	public ModelAndView getUpdateOrganization(@RequestParam("orgId") int orgId) throws Exception {
+	
+	
+	// Finding an organization by id
+	@PostMapping("/findById")
+	public @ResponseBody ModelAndView findById(@RequestParam("orgId") int orgId, Model model, RedirectAttributes redirect)
+	{
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("update_org");
-		mv.addObject("organization", organizationRepository.findById(orgId));
+		
+		if (organizationService.getOrgById(orgId).isPresent())
+		{
+			Organization organization = organizationService.getOrgById(orgId).get();
+			List<Organization> orgList = new ArrayList<>();
+			orgList.add(organization);
+			mv.setViewName("orgDisplay");
+			mv.addObject("organization", orgList);
+			return mv;
+		}
+		
+		redirect.addFlashAttribute("message", "Organziation not found!");
+		mv.setViewName("redirect:/");
 		return mv;
 	}
-
-	// Accepting the requested from and updating the organization and redirecting to
-	// orgList page
-	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public ModelAndView updateJob(@ModelAttribute Organization organization) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("org_info");
-		organizationRepository.save(organization);
-		mv.addObject("orgList", organizationRepository.findAll());
-		return mv;
+	
+	// Handling Delete 
+	@PostMapping("/delete/{orgId}")
+	public String delete(@PathVariable("orgId") int orgId, Model model)
+	{
+		if (organizationService.getOrgById(orgId).isPresent())
+		{
+			organizationService.deleteOrganization(orgId);
+			model.addAttribute("organization", organizationService.getAll());
+			return "orgDisplay";
+		}
+		
+		model.addAttribute("message", "Organization not found!");
+		return "index";
 	}
-
-	// getting orgId and Deleting object from orgRepo
-//
-	@RequestMapping(value = "/organization/{orgId}", method = RequestMethod.DELETE)
-	@ResponseStatus(value = HttpStatus.OK)
-	void deleteOrganization(@PathVariable("orgId") int orgId) throws Exception {
-		organizationRepository.deleteById(orgId);
+	
+	
+	// Handling post update
+	@PostMapping("/update/{orgId}")
+	public String update(@PathVariable("orgId") int orgId, @Valid Organization organization, BindingResult result, Model model)
+	{	
+		if (organizationService.getOrgById(orgId).isPresent()) {
+			
+			if (result.hasErrors()) {
+				return "orgUpdate";
+			}
+			
+			organizationService.updateOrganization(orgId, organization);
+			model.addAttribute("organization", organizationService.getAll());
+			return "orgDisplay";
+		} 
+		
+		model.addAttribute("message", "Organization not found!");
+		return "index";
 	}
-
-	// Receiving the request of deleting the object, receiving the Id of the object
-	// to delete and redirecting to jobList page
-	@RequestMapping(value = "/delete/{orgId}", method = RequestMethod.GET)
-	public ModelAndView getDeleteJob(@PathVariable("orgId") int orgId) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("org_info");
-		organizationRepository.deleteById(orgId);
-		mv.addObject("orgList", organizationRepository.findAll());
-		return mv;
+	
+	
+	//Rendering Update Page
+	@GetMapping("/update/{orgId}")
+	public String renderUpdate(@PathVariable("orgId") int orgId, Organization organization, Model model)
+	{
+		model.addAttribute("orgId", orgId);
+		return "orgUpdate"; 
 	}
+	
+	// Rendering add an organization page
+	@GetMapping("/add")
+	public String renderAdd(Organization organization) {
+		return "orgAdd";
+	}
+	
+	//Rendering find an organization page
+	@GetMapping("/findById")
+	public String renderFindById()
+	{
+		return "orgFindById";
+	}
+	
 }

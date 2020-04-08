@@ -1,16 +1,17 @@
 package com.spring.boot.microservice;
 
-import java.text.SimpleDateFormat;
+
 import java.util.Date;
-import java.util.Locale;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
 
 
@@ -21,23 +22,28 @@ public class Job {
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	@Column(name="jobid")
 	private int jobId;
-	@NotEmpty (message = "Job code is required.")
+	
+	
+	@NotNull (message = "Job code is required.")
 	@Column(name="jobcode")
 	private String jobCode;
 	
-	@NotEmpty (message = "Job name is required.")
+	@NotNull (message = "Job name is required.")
 	@Column(name="jobname")
 	private String jobName;
 	
-	@Length (min=10,max=2000,message = "Job description is required.")
+	@NotNull (message = "Job description is required.")
+	@Length (min=10,max=2000,message = "Job description should be between 10-200 characters.")
 	@Column(name="jobdesc")
 	private String jobDesc;
 	
-	@NotEmpty (message = "Pulished date is required.")
+	@NotNull (message = "Pulished date is required.")
+	@CreationTimestamp
+	@Temporal(TemporalType.DATE)
 	@Column(name="pubdate")
-	private String pubDate;
+	private Date pubDate;
 	
-	@NotEmpty (message = "Number of vacancies is required.")
+	@NotNull (message = "Number of vacancies is required.")
 	@Column(name="numvacancy")
 	private int numVacancy;
 	
@@ -50,13 +56,13 @@ public class Job {
 	public void setJobId(int jobId) {
 		this.jobId = jobId;
 	}
-	public Job(int jobId, String jobCode, String jobName, String jobDesc, String pubDate, int numVacancy) {
+	public Job(int jobId, String jobCode, String jobName, String jobDesc, Date pubDate, int numVacancy) {
 		super();
 		this.jobId = jobId;
 		this.jobCode = jobCode;
 		this.jobName = jobName;
 		this.jobDesc = jobDesc;
-		this.pubDate = getDate(pubDate);
+		this.pubDate = pubDate;
 		this.numVacancy = numVacancy;
 	}
 	public String getJobCode() {
@@ -77,10 +83,10 @@ public class Job {
 	public void setJobDesc(String jobDesc) {
 		this.jobDesc = jobDesc;
 	}
-	public String getPubDate() {
+	public Date getPubDate() {
 		return pubDate;
 	}
-	public void setPubDate(String pubDate) {
+	public void setPubDate(Date pubDate) {
 		this.pubDate = pubDate;
 	}
 	public int getNumVacancy() {
@@ -89,12 +95,12 @@ public class Job {
 	public void setNumVacancy(int numVacancy) {
 		this.numVacancy = numVacancy;
 	}
-	public String getDate(String pubDate) {
-		String pattern = "yyyy-MM-dd";
-		SimpleDateFormat simpleDateFormat =new SimpleDateFormat(pattern, new Locale("ca", "CA"));
-		String date = simpleDateFormat.format(new Date());
-		return date.toString();
-	}
+//	public String getDate(String pubDate) {
+//		String pattern = "yyyy-MM-dd";
+//		SimpleDateFormat simpleDateFormat =new SimpleDateFormat(pattern, new Locale("ca", "CA"));
+//		String date = simpleDateFormat.format(new Date());
+//		return date.toString();
+//	}
 	
 }
 

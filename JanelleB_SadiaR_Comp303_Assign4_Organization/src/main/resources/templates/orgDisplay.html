@@ -27,7 +27,8 @@
 			<th></th>
 		</tr>
 		</thead>
-		<tbody><tr th:each="organization : ${orgList}">
+		<tbody>
+		<tr th:each="organization : ${organization}">
 			<td th:text="${organization.orgId}">Organization Id</td>
 			<td th:text="${organization.orgName}">Organization Name</td>
 			<td th:text="${organization.address}">Address</td>
@@ -35,14 +36,26 @@
 			<td th:text="${organization.phoneNo}">Phone No</td>
 			<td th:text="${organization.email}">Email</td>
 			<td th:text="${organization.website}">Web site</td>
-			<td> <a th:href="@{/update(orgId=${organization.orgId})}" class="btn btn-primary">Update</a></td>
-			<td> <a th:href="@{'delete/' + ${organization.orgId}}" class="btn btn-danger">Delete</a></td>
-		</tr></tbody>
+			
+			<td> <form action="#" th:action="@{'/organization/update/{orgId}'(orgId=${organization.orgId})}" th:method="GET"> 	
+					<input type="hidden" name="_method" value="update" />
+  					<button type="submit" id="submitButton">UPDATE</button>
+				</form>
+			</td>
+			<td><td>
+				<form action="#" th:action="@{'/organziation/delete/{orgId}'(orgId=${organization.orgId})}" th:method="POST"> 	
+					<input type="hidden" name="_method" value="delete" />
+  					<button type="submit" id="submitButton">DELETE</button>
+				</form>
+			</td>			
+		</tr>
+		</tbody>
 		
 	</table>
+	<div style="text-align:center">
+		<a href="/">Home</a>  
+		</div>
 	</div>
-		
-    <strong><a href="/" class="nav-link">Go back</a></strong>
 </div>
 
 </div>
