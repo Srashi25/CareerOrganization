@@ -139,7 +139,7 @@
               <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
                   <label class="text-black" for="website">Web site</label>
-                  <input type="text" id="website" class="form-control" th:field="*{website}"  placeholder="www.abc.com"/>
+                  <input type="text" id="website" class="form-control" th:field="*{website}"  placeholder="https://www.abc.com"/>
                   <span class="text-red" th:if="${#fields.hasErrors('website')}" th:errors="*{website}"></span>
                 </div>
               </div>

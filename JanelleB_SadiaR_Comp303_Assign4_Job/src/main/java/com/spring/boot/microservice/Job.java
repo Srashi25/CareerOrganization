@@ -36,7 +36,7 @@ public class Job {
 	private String jobName;
 	
 	@NotNull (message = "Job description is required.")
-	@Length (min=10,max=2000,message = "Job description should be between 10-200 characters.")
+	@Length (min=10,max=200,message = "Job description should be between 10-200 characters.")
 	@Column(name="jobdesc")
 	private String jobDesc;
 	

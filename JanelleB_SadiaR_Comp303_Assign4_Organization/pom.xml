@@ -12,11 +12,10 @@
 	<artifactId>JanelleB_SadiaR_Comp303_Assign4_Organization</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>JanelleB_SadiaR_Comp303_Assign4_Organization</name>
-	<description>Assignment4 </description>
+	<description>Assignment4 -Organization Microservice</description>
 
 	<properties>
 		<java.version>1.8</java.version>
-		<spring-cloud.version>Hoxton.SR3</spring-cloud.version>
 	</properties>
 
 	<dependencies>
@@ -26,19 +25,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-mongodb</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 		</dependency>
 
 		<dependency>
@@ -63,19 +54,13 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>
+				spring-cloud-starter-netflix-eureka-server
+			</artifactId>
+		</dependency>
 	</dependencies>
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<build>
 		<plugins>
@@ -86,4 +71,15 @@
 		</plugins>
 	</build>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Hoxton.SR3</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>

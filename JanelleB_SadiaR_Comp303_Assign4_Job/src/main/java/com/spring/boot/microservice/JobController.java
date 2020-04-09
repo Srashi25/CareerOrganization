@@ -11,17 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
+
 @RequestMapping("job")
 @Controller
 public class JobController {
 	@Autowired
-    JobService jobService;
+   private JobService jobService;
 
 	// Rendering Index page
 	@RequestMapping("/")
@@ -110,9 +112,10 @@ public class JobController {
 	
 	//Rendering Update Page
 	@GetMapping("/update/{jobId}")
-	public String renderUpdate(@PathVariable("jobId") int jobId, Job job, Model model)
+	public String renderUpdate(@PathVariable("jobId") int jobId, @ModelAttribute("job")Job job, Model model)
 	{
-		model.addAttribute("jobId", jobId);
+		job = jobService.findOneById(jobId);
+		model.addAttribute("job", job);
 		return "jobUpdate"; 
 	}
 	

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+
 @Service
 public class OrganizationService {
 	
@@ -33,4 +34,7 @@ public class OrganizationService {
 		organizationRepository.deleteById(id);
 	}
 
+	public Organization findOneById(final int id) {
+		return organizationRepository.findOneById(id);
+	}
 }

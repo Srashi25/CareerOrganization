@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class JobService {
+	
 	@Autowired
 	private JobRepository jobRepository;
 	
@@ -30,6 +32,9 @@ public class JobService {
 	public void deleteJob(final int id) {
 		jobRepository.deleteById(id);
 	}
-
+	public Job findOneById(final int id) {
+		return jobRepository.findOneById(id);
+	}
+	
 
 }

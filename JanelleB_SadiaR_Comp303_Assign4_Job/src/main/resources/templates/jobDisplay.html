@@ -140,7 +140,6 @@
               </div>
                <div class="cell-1" data-title="Number of Vacancies" th:text="${job.numVacancy}">
               </div>
-              
               <div class="cell-1" data-title="Update">
               	<form action="#" th:action="@{'/job/update/{jobId}'(jobId=${job.jobId})}" th:method="GET"> 	
 					<input type="hidden" name="_method" value="update" />

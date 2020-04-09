@@ -28,7 +28,7 @@ public class Organization {
 	private String orgName;
 	
 	@NotNull(message="Please add address.")
-	@Length (min=10,max=100,message = "Address should be between 20-100 characters.")
+	@Length (min=10,max=100,message = "Address should be between 10-100 characters.")
 	@Column(name="address")
 	private String address;
 	
@@ -43,12 +43,12 @@ public class Organization {
 	private String phoneNo;
 	
 	@NotNull(message="Please add email.")
-	//@Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
-			//message="{invalid.email}")
+	@Pattern(regexp="^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$",
+			message="{invalid.email}")
 	@Column(name="email")
 	private String email;
 	
-	// @URL(regexp = "^(http|ftp).*")
+	 @URL
 	@Column(name="website")
 	private String website;
 	

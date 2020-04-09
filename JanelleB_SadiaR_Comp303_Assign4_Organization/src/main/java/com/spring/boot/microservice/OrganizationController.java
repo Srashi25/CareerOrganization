@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 @RequestMapping("organization")
 @Controller
 public class OrganizationController {
@@ -116,11 +117,13 @@ public class OrganizationController {
 	
 	//Rendering Update Page
 	@GetMapping("/update/{orgId}")
-	public String renderUpdate(@PathVariable("orgId") int orgId, Organization organization, Model model)
+	public String renderUpdate(@PathVariable("orgId") int orgId, @ModelAttribute("organization")Organization organization, Model model)
 	{
-		model.addAttribute("orgId", orgId);
+		organization = organizationService.findOneById(orgId);
+		model.addAttribute("organization", organization);
 		return "orgUpdate"; 
 	}
+	
 	
 	// Rendering add an organization page
 	@GetMapping("/add")
