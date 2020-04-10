@@ -61,7 +61,7 @@
                   <li><a href="add">Add Organization</a></li>
                 </ul>
               </li>
-              <li class="has-children">
+            <!--   <li class="has-children">
                 <a href="job-listings.html">Category</a>
                 <ul class="dropdown">
                   <li><a href="job-single.html">List All Categories</a></li>
@@ -76,7 +76,7 @@
                   <li><a href="post-job.html">Find A Job</a></li>
                   <li><a href="post-job.html">Add Job</a></li>
                 </ul>
-              </li>
+              </li> -->
             </ul>
           </nav>
         </div>
@@ -147,8 +147,8 @@
               </div>
               
               <div class="cell-1" data-title="Update">
-              	<form action="#" th:action="@{'/organization/update/{orgId}'(orgId=${org.orgId})}" th:method="GET"> 	
-					<input type="hidden" name="_method" value="update" />
+              	<form action="#" th:action="@{'/organization/edit/{orgId}'(orgId=${org.orgId})}" th:method="GET"> 	
+              			<input type="hidden" name="_method" value="update" />
   					<button type="submit" id="submitButton" class="btn btn-info btn-sm text-white">UPDATE</button>
 				</form>
               </div>

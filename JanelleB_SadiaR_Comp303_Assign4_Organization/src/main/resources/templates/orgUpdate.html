@@ -61,22 +61,22 @@
                   <li><a href="../add">Add Organization</a></li>
                 </ul>
               </li>
-              <li class="has-children">
+             <!--  <li class="has-children">
                 <a href="job-listings.html">Category</a>
                 <ul class="dropdown">
-                  <li><a href="job-single.html">List All Categories</a></li>
-                  <li><a href="post-job.html">Find A Category</a></li>
-                  <li><a href="post-job.html">Add Category</a></li>
+                  <li><a href="#">List All Categories</a></li>
+                  <li><a href="#">Find A Category</a></li>
+                  <li><a href="#">Add Category</a></li>
                 </ul>
               </li>
               <li class="has-children">
                 <a href="job-listings.html">Job</a>
                 <ul class="dropdown">
-                  <li><a href="job-single.html">List All Jobs</a></li>
-                  <li><a href="post-job.html">Find A Job</a></li>
-                  <li><a href="post-job.html">Add Job</a></li>
+                  <li><a href="#">List All Jobs</a></li>
+                  <li><a href="#">Find A Job</a></li>
+                  <li><a href="#">Add Job</a></li>
                 </ul>
-              </li>
+              </li> -->
             </ul>
           </nav>
         </div>
@@ -98,8 +98,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6 mb-5 mb-lg-0">
-            <form action="#" th:action="@{'/category/update/{jobCatId}'(jobCatId=${jobCatId})}" th:object="${category}" th:method="POST" class="">
-
+            <form action="#" th:action="@{'/organization/update/{orgId}'(orgId=${organization.orgId})}" th:object="${organization}" th:method="POST" >
               <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
                   <label class="text-black" for="orgId">Organization ID</label>

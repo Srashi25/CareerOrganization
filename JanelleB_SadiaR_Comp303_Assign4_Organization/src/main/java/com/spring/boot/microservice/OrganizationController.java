@@ -116,7 +116,7 @@ public class OrganizationController {
 	
 	
 	//Rendering Update Page
-	@GetMapping("/update/{orgId}")
+	@GetMapping("/edit/{orgId}")
 	public String renderUpdate(@PathVariable("orgId") int orgId, @ModelAttribute("organization")Organization organization, Model model)
 	{
 		organization = organizationService.findOneById(orgId);

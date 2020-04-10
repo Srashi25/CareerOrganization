@@ -52,8 +52,8 @@
 
           <nav class="mx-auto site-navigation">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-              <li><a href="#">Home</a></li>
-              <li class="has-children">
+              <li><a href="show">Home</a></li>
+             <!--  <li class="has-children">
                 <a href="/" class="nav-link active">Job</a>
                 <ul class="dropdown">
                   <li><a href="../show">List All Organization</a></li>
@@ -68,13 +68,13 @@
                   <li><a href="post-job.html">Find A Category</a></li>
                   <li><a href="post-job.html">Add Category</a></li>
                 </ul>
-              </li>
+              </li> -->
               <li class="has-children">
-                <a href="job-listings.html">Job</a>
+                <a href="#" class="nav-link active">Job</a>
                 <ul class="dropdown">
-                  <li><a href="job-single.html">List All Jobs</a></li>
-                  <li><a href="post-job.html">Find A Job</a></li>
-                  <li><a href="post-job.html">Add Job</a></li>
+                  <li><a href="/job/show">List All Jobs</a></li>
+                  <li><a href="/job/findById">Find A Job</a></li>
+                  <li><a href="/job/add">Add Job</a></li>
                 </ul>
               </li>
             </ul>
@@ -98,7 +98,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6 mb-5 mb-lg-0">
-            <form action="#" th:action="@{'/category/update/{jobCatId}'(jobCatId=${jobCatId})}" th:object="${category}" th:method="POST" class="">
+            <form action="#" th:action="@{'/job/update/{jobId}'(jobId=${job.jobId})}" th:object="${job}" th:method="POST">
 
               <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
@@ -134,7 +134,7 @@
                <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
                   <label class="text-black" for="pubDate">Published Date</label>
-                  <input type="text" id="pubDate" class="form-control" th:field="*{pubDate}" />
+                  <input type="date" id="pubDate" class="form-control" th:field="*{pubDate}" />
                   <span class="text-red" th:if="${#fields.hasErrors('pubDate')}" th:errors="*{pubDate}"></span>
                 </div>
               </div>
@@ -142,7 +142,7 @@
                <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
                   <label class="text-black" for="numVacancy">Number of Vacancies</label>
-                  <input type="text" id="email" class="form-control" th:field="*{numVacancy}" />
+                  <input type="text" id="numVacancy" class="form-control" th:field="*{numVacancy}" />
                   <span class="text-red" th:if="${#fields.hasErrors('numVacancy')}" th:errors="*{numVacancy}"></span>
                 </div>
               </div>

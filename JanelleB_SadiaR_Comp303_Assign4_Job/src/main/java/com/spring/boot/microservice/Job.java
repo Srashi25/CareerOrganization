@@ -1,20 +1,14 @@
 package com.spring.boot.microservice;
 
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
+import java.text.ParseException;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
 
 
@@ -25,7 +19,6 @@ public class Job {
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	@Column(name="jobid")
 	private int jobId;
-	
 	
 	@NotNull (message = "Job code is required.")
 	@Column(name="jobcode")
@@ -46,7 +39,10 @@ public class Job {
 	
 	@NotNull (message = "Number of vacancies is required.")
 	@Column(name="numvacancy")
+	@Digits(integer = 5, fraction = 0, message="Number without fraciton required.")
 	private int numVacancy;
+	
+	//private String newDate;
 	
 	public Job() {
 		super();
@@ -57,7 +53,7 @@ public class Job {
 	public void setJobId(int jobId) {
 		this.jobId = jobId;
 	}
-	public Job(int jobId, String jobCode, String jobName, String jobDesc, String pubDate, int numVacancy) {
+	public Job(int jobId, String jobCode, String jobName, String jobDesc, String pubDate, int numVacancy) throws ParseException {
 		super();
 		this.jobId = jobId;
 		this.jobCode = jobCode;
@@ -87,7 +83,10 @@ public class Job {
 	public String getPubDate() {
 		return pubDate;
 	}
-	public void setPubDate(String pubDate) {
+	public void setPubDate(String pubDate) throws ParseException {
+//		 SimpleDateFormat formatter1 = new SimpleDateFormat("dd-M-yyyy", Locale.CANADA);
+//		 formatter1.setTimeZone(TimeZone.getTimeZone("Canada/Toronto"));
+//		this.pubDate = formatter1.parse(pubDate);
 		this.pubDate = pubDate;
 	}
 	public int getNumVacancy() {
@@ -96,12 +95,7 @@ public class Job {
 	public void setNumVacancy(int numVacancy) {
 		this.numVacancy = numVacancy;
 	}
-	public String getDate(String pubDate) {
-		String pattern = "yyyy-MM-dd";
-		SimpleDateFormat simpleDateFormat =new SimpleDateFormat(pattern, new Locale("ca", "CA"));
-		String date = simpleDateFormat.format(new Date());
-		return date.toString();
-	}
+
 	
 }
 
