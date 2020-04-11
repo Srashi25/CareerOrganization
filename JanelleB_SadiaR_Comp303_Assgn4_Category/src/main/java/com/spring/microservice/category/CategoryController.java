@@ -69,7 +69,7 @@ public class CategoryController {
 		{
 			categoryService.deleteCategory(jobCatId);
 			model.addAttribute("category", categoryService.getAll());
-			return "categoryDisplay";
+			return "redirect:/category/show";
 		}
 		
 		model.addAttribute("message", "Category not found!");
@@ -87,7 +87,7 @@ public class CategoryController {
 			
 			categoryService.updateCategory(jobCatId, category);
 			model.addAttribute("category", categoryService.getAll());
-			return "categoryDisplay";
+			return "redirect:/category/show";
 		} 
 		
 		model.addAttribute("message", "Category not found!");

@@ -48,33 +48,33 @@
     <header class="site-navbar mt-3">
       <div class="container-fluid">
         <div class="row align-items-center">
-          <div class="site-logo col-6"><a href="#">JobBoard</a></div>
+          <div class="site-logo col-6"><a href="http://localhost:8761/home">JobBoard</a></div>
 
           <nav class="mx-auto site-navigation">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-              <li><a href="#">Home</a></li>
+              <li><a href="http://localhost:8761/home">Home</a></li>
               <li class="has-children">
-                <a href="/" class="nav-link active">Organization</a>
+                <a href="http://localhost:8084">Organization</a>
                 <ul class="dropdown">
-                  <li><a href="show">List All Organization</a></li>
-                  <li><a href="findById">Find An Organization</a></li>
-                  <li><a href="add">Add Organization</a></li>
+                  <li><a href="http://localhost:8084/organization/show">List All Organization</a></li>
+                  <li><a href="http://localhost:8084/organization/findById">Find An Organization</a></li>
+                  <li><a href="http://localhost:8084/organization/add">Add Organization</a></li>
                 </ul>
               </li>
               <li class="has-children">
-                <a href="job-listings.html">Category</a>
+                <a href="/" class="nav-link active">Category</a>
                 <ul class="dropdown">
-                  <li><a href="job-single.html">List All Categories</a></li>
-                  <li><a href="post-job.html">Find A Category</a></li>
-                  <li><a href="post-job.html">Add Category</a></li>
+                  <li><a href="show">List All Categories</a></li>
+                  <li><a href="findById">Find A Category</a></li>
+                  <li><a href="add">Add Category</a></li>
                 </ul>
               </li>
               <li class="has-children">
-                <a href="job-listings.html">Job</a>
+                <a href="http://localhost:8085">Job</a>
                 <ul class="dropdown">
-                  <li><a href="job-single.html">List All Jobs</a></li>
-                  <li><a href="post-job.html">Find A Job</a></li>
-                  <li><a href="post-job.html">Add Job</a></li>
+                  <li><a href="http://localhost:8085/job/show">List All Jobs</a></li>
+                  <li><a href="http://localhost:8085/job/findById">Find A Job</a></li>
+                  <li><a href="http://localhost:8085/job/add">Add Job</a></li>
                 </ul>
               </li>
             </ul>

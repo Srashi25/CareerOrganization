@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("job")
 @Controller
 public class JobController {
+	
 	@Autowired
    private JobService jobService;
 
@@ -82,7 +83,7 @@ public class JobController {
 		{
 			jobService.deleteJob(jobId);
 			model.addAttribute("job", jobService.getAll());
-			return "jobDisplay";
+			return "redirect:/job/show";
 		}
 		
 		model.addAttribute("message", "Job not found!");
@@ -102,7 +103,7 @@ public class JobController {
 			
 			jobService.updateJob(jobId, job);
 			model.addAttribute("job", jobService.getAll());
-			return "jobDisplay";
+			return "redirect:/job/show";
 		} 
 		
 		model.addAttribute("message", "Job not found!");
