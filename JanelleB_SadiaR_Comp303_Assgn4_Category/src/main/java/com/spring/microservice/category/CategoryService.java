@@ -32,8 +32,4 @@ public class CategoryService {
 		categoryRepository.deleteById(id);
 	}
 	
-	public Category findCategoryById(final int id) {
-		return categoryRepository.findCategoryById(id);
-	}
-	
 }
