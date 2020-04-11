@@ -6,7 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+/**
+ * Janelle Baetiong (300966120) and Sadia Rashid (300963357)
+ * COMP303 - 001 - Lab Assignment#4
+ */
 
 @Service
 public class OrganizationService {

@@ -11,6 +11,11 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+/**
+ * Janelle Baetiong (300966120) and Sadia Rashid (300963357)
+ * COMP303 - 001 - Lab Assignment#4
+ */
+
 @Entity
 @Table(name="job")
 public class Job {

@@ -3,6 +3,11 @@ package com.spring.boot.microservice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Janelle Baetiong (300966120) and Sadia Rashid (300963357)
+ * COMP303 - 001 - Lab Assignment#4
+ */
+
 @SpringBootApplication
 public class JanelleBSadiaRComp303Assign4JobApplication {
 

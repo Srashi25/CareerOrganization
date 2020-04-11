@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * Janelle Baetiong (300966120) and Sadia Rashid (300963357)
+ * COMP303 - 001 - Lab Assignment#4
+ */
+
 @RequestMapping("job")
 @Controller
 public class JobController {

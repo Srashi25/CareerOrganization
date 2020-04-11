@@ -12,6 +12,11 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
+/**
+ * Janelle Baetiong (300966120) and Sadia Rashid (300963357)
+ * COMP303 - 001 - Lab Assignment#4
+ */
+
 
 @Entity
 @Table(name="organization")
