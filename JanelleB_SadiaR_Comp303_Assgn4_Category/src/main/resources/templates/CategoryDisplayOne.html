@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Category - Display One</title>
+</head>
+<body>
+<table border="1" style="margin:0 auto">
+		<tr>
+			<th>Category Id</th>
+			<th>Category Code</th>
+			<th>Category Name</th>
+			<th>Category Description</th>
+		</tr>
+		<tr>
+			<td th:text="${category.jobCatId}">Category Id</td>
+			<td th:text="${category.catCode}">Category Code</td>
+			<td th:text="${category.catName}">Category Name</td>
+			<td th:text="${category.catDesc}">Category Description</td>				
+			
+			
+			<td>
+				<form action="#" th:action="@{'/category/update/{jobCatId}'(jobCatId=${category.jobCatId})}" th:method="GET"> 	
+					<input type="hidden" name="_method" value="update" />
+  					<button type="submit" id="submitButton">UPDATE</button>
+				</form>
+			</td>	
+			<td>
+				<form action="#" th:action="@{'/category/delete/{jobCatId}'(jobCatId=${category.jobCatId})}" th:method="POST"> 	
+					<input type="hidden" name="_method" value="delete" />
+  					<button type="submit" id="submitButton">DELETE</button>
+				</form>
+			</td>				
+		</tr>
+		</table>
+		<div style="text-align:center">
+		<a href="/">Home</a>  
+		</div>
+</body>
+</html>
