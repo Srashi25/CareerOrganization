@@ -17,45 +17,48 @@ import org.hibernate.validator.constraints.URL;
  * COMP303 - 001 - Lab Assignment#4
  */
 
-
+//Entity and Table for Org
 @Entity
 @Table(name="organization")
 public class Organization {
 	
+	// Properties of Org
 	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO)
+	@GeneratedValue (strategy = GenerationType.AUTO) // Primary key auto-generated
 	@Column(name="orgid")
 	private int orgId;
 	
-	@NotNull(message="Please add organization name.")
-	@NotEmpty (message = "Please add organization name.")
+	@NotNull(message="Please add organization name.") // validation
+	@NotEmpty (message = "Please add organization name.") // validation
 	@Column(name="orgname")
 	private String orgName;
 	
-	@NotNull(message="Please add address.")
-	@Length (min=10,max=100,message = "Address should be between 10-100 characters.")
+	@NotNull(message="Please add address.") // validation
+	@Length (min=10,max=100,message = "Address should be between 10-100 characters.") // validation
 	@Column(name="address")
 	private String address;
 	
-	@NotNull(message="Please add postal code.")
-	@Pattern(regexp="^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]●?[0-9][A-Z][0-9]$", message ="Postal code is invalid.")
+	@NotNull(message="Please add postal code.") // validation
+	@Pattern(regexp="^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]●?[0-9][A-Z][0-9]$", message ="Postal code is invalid.") // validation
 	@Column(name="postalcode")
 	private String postalCode;
 	
-	@NotNull(message="Please add phone number.")
-	@Pattern(regexp="^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$", message="Phone number is invalid")
+	@NotNull(message="Please add phone number.") // validation
+	@Pattern(regexp="^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$", message="Phone number is invalid") // validation
 	@Column(name="phoneno")
 	private String phoneNo;
 	
-	@NotNull(message="Please add email.")
+	@NotNull(message="Please add email.") // validation
 	@Pattern(regexp="^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$",
-			message="{invalid.email}")
+			message="{invalid.email}") // validation
 	@Column(name="email")
 	private String email;
 	
-	 @URL
+	@URL // validation
 	@Column(name="website")
 	private String website;
+	
+	// constructors
 	
 	public Organization() {
 		super();
@@ -71,6 +74,9 @@ public class Organization {
 		this.email = email;
 		this.website = website;
 	}
+	
+	// getters and setters
+	
 	public int getOrgId() {
 		return orgId;
 	}
@@ -113,7 +119,6 @@ public class Organization {
 	public void setWebsite(String website) {
 		this.website = website;
 	}
-
 
 }
 

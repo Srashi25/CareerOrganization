@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface JobRepository extends JpaRepository<Job, Integer> {
 
+	// this query is used for the update so that it will return the instance of the job
 	@Query("SELECT j FROM Job j WHERE j.jobId = ?1")
 	Job findOneById(int jobid);
 	

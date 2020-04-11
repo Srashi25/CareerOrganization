@@ -24,12 +24,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * COMP303 - 001 - Lab Assignment#4
  */
 
+//request mapping so that for this service all url will start with job after localhost
 @RequestMapping("job")
 @Controller
 public class JobController {
 	
+	// connection to the queries in the repositories through Service
 	@Autowired
-   private JobService jobService;
+	private JobService jobService;
 
 	// Rendering Index page
 	@RequestMapping("/")
@@ -38,6 +40,7 @@ public class JobController {
 		return "index";
 	}
 	
+	// to display all jobs
 	@RequestMapping("/show")
 	public String show(Model model)
 	{
@@ -45,10 +48,11 @@ public class JobController {
 		return "jobDisplay";
 	}
 	
-	// Getting all the organizations
+	// adding organization
 	@PostMapping("/show")
 	public String add(@Valid Job job, BindingResult result, Model model)
 	{
+		// if there is an error in the user input it will return the page with the validation message
 		if (result.hasErrors()) {
 			return "jobAdd";
 		}
@@ -65,6 +69,7 @@ public class JobController {
 	{
 		ModelAndView mv = new ModelAndView();
 		
+		// if there is an error in the user input it will return the page with the validation message
 		if (jobService.getJobById(jobId).isPresent())
 		{
 			Job job = jobService.getJobById(jobId).get();
@@ -75,6 +80,7 @@ public class JobController {
 			return mv;
 		}
 		
+		// if job is not found, it will redirect to category index page with the error message
 		redirect.addFlashAttribute("message", "Job not found!");
 		mv.setViewName("redirect:/");
 		return mv;
@@ -84,6 +90,7 @@ public class JobController {
 	@PostMapping("/delete/{jobId}")
 	public String delete(@PathVariable("jobId") int jobId, Model model)
 	{
+		// if there is an error in the user input it will return the page with the validation message
 		if (jobService.getJobById(jobId).isPresent())
 		{
 			jobService.deleteJob(jobId);
@@ -100,8 +107,10 @@ public class JobController {
 	@PostMapping("/update/{jobId}")
 	public String update(@PathVariable("jobId") int jobId, @Valid Job job, BindingResult result, Model model)
 	{	
+		// if there is an error in the user input it will return the page with the validation message
 		if (jobService.getJobById(jobId).isPresent()) {
 			
+			// if there is an error in the user input it will return the page with the validation message
 			if (result.hasErrors()) {
 				return "jobUpdate";
 			}

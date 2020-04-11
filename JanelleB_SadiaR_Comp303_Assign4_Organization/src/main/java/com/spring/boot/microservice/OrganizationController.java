@@ -18,11 +18,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * COMP303 - 001 - Lab Assignment#4
  */
 
-
+//request mapping so that for this service all url will start with org after localhost
 @RequestMapping("organization")
 @Controller
 public class OrganizationController {
 
+	// connection to the queries in the repositories through Service
 	@Autowired
 	OrganizationService organizationService;
 
@@ -32,6 +33,7 @@ public class OrganizationController {
 		return "index";
 	}
 	
+	// method to display all org
 	@RequestMapping("/show")
 	public String show(Model model)
 	{
@@ -39,10 +41,11 @@ public class OrganizationController {
 		return "orgDisplay";
 	}
 	
-	// Getting all the organizations
+	// method to add the organization
 	@PostMapping("/show")
 	public String add(@Valid Organization organization, BindingResult result, Model model)
 	{
+		// if there is an error in the user input it will return the page with the validation message
 		if (result.hasErrors()) {
 			return "orgAdd";
 		}
@@ -59,6 +62,7 @@ public class OrganizationController {
 	{
 		ModelAndView mv = new ModelAndView();
 		
+		// validation to check if the org is found to return the category
 		if (organizationService.getOrgById(orgId).isPresent())
 		{
 			Organization organization = organizationService.getOrgById(orgId).get();
@@ -69,6 +73,7 @@ public class OrganizationController {
 			return mv;
 		}
 		
+		// if org is not found, it will redirect to category index page with the error message
 		redirect.addFlashAttribute("message", "Organization not found!");
 		mv.setViewName("redirect:/");
 		return mv;
@@ -78,6 +83,7 @@ public class OrganizationController {
 	@PostMapping("/delete/{orgId}")
 	public String delete(@PathVariable("orgId") int orgId, Model model)
 	{
+		// validation to check if the org is found to return the category
 		if (organizationService.getOrgById(orgId).isPresent())
 		{
 			organizationService.deleteOrganization(orgId);
@@ -94,8 +100,10 @@ public class OrganizationController {
 	@PostMapping("/update/{orgId}")
 	public String update(@PathVariable("orgId") int orgId, @Valid Organization organization, BindingResult result, Model model)
 	{	
+		// validation to check if the org is found to return the category
 		if (organizationService.getOrgById(orgId).isPresent()) {
 			
+			// if there is an error in the user input it will return the page with the validation message
 			if (result.hasErrors()) {
 				return "orgUpdate";
 			}

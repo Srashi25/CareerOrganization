@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface OrganizationRepository extends JpaRepository<Organization, Integer> {
 
+	// this query is used for the update so that it will return the instance of the org
 	@Query("SELECT o FROM Organization o WHERE o.orgId = ?1")
 	Organization findOneById(int orgid);
 	

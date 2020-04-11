@@ -15,48 +15,44 @@ import org.hibernate.validator.constraints.Length;
  * Janelle Baetiong (300966120) and Sadia Rashid (300963357)
  * COMP303 - 001 - Lab Assignment#4
  */
-
+//Entity and Table for Job
 @Entity
 @Table(name="job")
 public class Job {
+	
+	// Properties of Job
 	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO)
+	@GeneratedValue (strategy = GenerationType.AUTO)// Primary key auto-generated
 	@Column(name="jobid")
 	private int jobId;
 	
-	@NotNull (message = "Job code is required.")
+	@NotNull (message = "Job code is required.") // validation
 	@Column(name="jobcode")
 	private String jobCode;
 	
-	@NotNull (message = "Job name is required.")
+	@NotNull (message = "Job name is required.") // validation
 	@Column(name="jobname")
 	private String jobName;
 	
-	@NotNull (message = "Job description is required.")
-	@Length (min=10,max=200,message = "Job description should be between 10-200 characters.")
+	@NotNull (message = "Job description is required.") // validation
+	@Length (min=10,max=200,message = "Job description should be between 10-200 characters.") // validation
 	@Column(name="jobdesc")
 	private String jobDesc;
 	
-	@NotNull (message = "Pulished date is required.")
+	@NotNull (message = "Pulished date is required.") // validation
 	@Column(name="pubdate")
 	private String pubDate;
 	
-	@NotNull (message = "Number of vacancies is required.")
+	@NotNull (message = "Number of vacancies is required.") // validation
 	@Column(name="numvacancy")
-	@Digits(integer = 5, fraction = 0, message="Number without fraciton required.")
+	@Digits(integer = 5, fraction = 0, message="Number without fraction required.") // validation
 	private int numVacancy;
 	
-	//private String newDate;
-	
+	// constructors
 	public Job() {
 		super();
 	}
-	public int getJobId() {
-		return jobId;
-	}
-	public void setJobId(int jobId) {
-		this.jobId = jobId;
-	}
+	
 	public Job(int jobId, String jobCode, String jobName, String jobDesc, String pubDate, int numVacancy)  {
 		super();
 		this.jobId = jobId;
@@ -65,6 +61,15 @@ public class Job {
 		this.jobDesc = jobDesc;
 		this.pubDate = pubDate;
 		this.numVacancy = numVacancy;
+	}
+	
+	// getters and setters
+	
+	public int getJobId() {
+		return jobId;
+	}
+	public void setJobId(int jobId) {
+		this.jobId = jobId;
 	}
 	public String getJobCode() {
 		return jobCode;
@@ -96,6 +101,4 @@ public class Job {
 	public void setNumVacancy(int numVacancy) {
 		this.numVacancy = numVacancy;
 	}
-
-	
 }
