@@ -1,6 +1,5 @@
 package com.spring.boot.microservice;
 
-import java.text.ParseException;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.Length;
 
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name="job")
@@ -53,7 +52,7 @@ public class Job {
 	public void setJobId(int jobId) {
 		this.jobId = jobId;
 	}
-	public Job(int jobId, String jobCode, String jobName, String jobDesc, String pubDate, int numVacancy) throws ParseException {
+	public Job(int jobId, String jobCode, String jobName, String jobDesc, String pubDate, int numVacancy)  {
 		super();
 		this.jobId = jobId;
 		this.jobCode = jobCode;
@@ -83,10 +82,7 @@ public class Job {
 	public String getPubDate() {
 		return pubDate;
 	}
-	public void setPubDate(String pubDate) throws ParseException {
-//		 SimpleDateFormat formatter1 = new SimpleDateFormat("dd-M-yyyy", Locale.CANADA);
-//		 formatter1.setTimeZone(TimeZone.getTimeZone("Canada/Toronto"));
-//		this.pubDate = formatter1.parse(pubDate);
+	public void setPubDate(String pubDate)  {
 		this.pubDate = pubDate;
 	}
 	public int getNumVacancy() {
@@ -98,4 +94,3 @@ public class Job {
 
 	
 }
-

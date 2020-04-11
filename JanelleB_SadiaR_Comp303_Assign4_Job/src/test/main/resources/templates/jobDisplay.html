@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+  <head>
+  	<title>Job - Display All</title>
+    <meta charset="ISO-8859-1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Free-Template.co" />
+    <link rel="shortcut icon" href="ftco-32x32.png">
+    
+    <link rel="stylesheet" th:href="@{/css/custom-bs.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery.fancybox.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap-select.min.css}">
+    <link rel="stylesheet" th:href="@{/fonts/icomoon/style.css}">
+    <link rel="stylesheet" th:href="@{/fonts/line-icons/style.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.min.css}">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}"> 
+       
+  </head>
+  <body id="top">
+
+  <div id="overlayer"></div>
+  <div class="loader">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+    
+
+<div class="site-wrap">
+
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+    
+
+    <!-- NAVBAR -->
+    <header class="site-navbar mt-3">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="site-logo col-6"><a href="#">Job Board</a></div>
+
+          <nav class="mx-auto site-navigation">
+            <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
+              <li><a href="show">Home</a></li>
+            <!--   <li class="has-children">
+                <a href="/" class="nav-link active">Organization</a>
+                <ul class="dropdown">
+                  <li><a href="organization/show">List All Organization</a></li>
+                  <li><a href="organization/findById">Find An Organization</a></li>
+                  <li><a href="organizaition/add">Add Organization</a></li>
+                </ul>
+              </li>
+              <li class="has-children">
+                <a href="job-listings.html">Category</a>
+                <ul class="dropdown">
+                  <li><a href="category/show">List All Categories</a></li>
+                  <li><a href="category/findById">Find A Category</a></li>
+                  <li><a href="category/add">Add Category</a></li>
+                </ul>
+              </li> -->
+              <li class="has-children">
+                <a href="#" class="nav-link active">Job</a>
+                <ul class="dropdown">
+                  <li><a href="/job/show">List All Jobs</a></li>
+                  <li><a href="/job/findById">Find A Job</a></li>
+                  <li><a href="/job/add">Add Job</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- HOME -->
+    <section class="section-hero overlay inner-page bg-image" th:style="'background-image: url(' + @{/images/hero_1.jpg} + ');'" id="home-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7">
+            <h1 class="text-white font-weight-bold">List of All Jobs</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-section" id="next-section">
+      <div class="container">
+        
+        <div class="wrap-table100-1">
+          <div class="table-1">
+
+            <div class="row-1 header-1">
+              <div class="cell-1">
+                Job ID
+              </div>
+              <div class="cell-1">
+                Job Name
+              </div>
+              <div class="cell-1">
+                Job Code
+              </div>
+              <div class="cell-1">
+                Job Description
+              </div>
+              <div class="cell-1">
+               Published Date
+              </div>
+              <div class="cell-1">
+               Number of Vacancies
+              </div>
+              <div class="cell-1">
+               Update
+              </div>
+              <div class="cell-1">
+               Delete
+              </div>
+            </div>
+
+            <div th:each="job : ${job}" class="row-1">
+              <div class="cell-1" data-title="Job Id" th:text="${job.jobId}">
+              </div>
+              <div class="cell-1" data-title="Job Code" th:text="${job.jobCode}">
+              </div>
+              <div class="cell-1" data-title="Job Name" th:text="${job.jobName}">
+              </div>
+              <div class="cell-1" data-title="Job Description" th:text="${job.jobDesc}">
+              </div>
+               <div class="cell-1" data-title="Published Date" th:text="${job.pubDate}">
+              </div>
+               <div class="cell-1" data-title="Number of Vacancies" th:text="${job.numVacancy}">
+              </div>
+              <div class="cell-1" data-title="Update">
+              	<form action="#" th:action="@{'/job/update/{jobId}'(jobId=${job.jobId})}" th:method="GET"> 	
+					<input type="hidden" name="_method" value="update" />
+  					<button type="submit" id="submitButton" class="btn btn-info btn-sm text-white">UPDATE</button>
+				</form>
+              </div>
+              
+              <div class="cell-1" data-title="Delete">
+              	<form action="#" th:action="@{'/job/delete/{jobId}'(jobId=${job.jobId})}" th:method="POST"> 	
+					<input type="hidden" name="_method" value="delete" />
+  					<button type="submit" id="submitButton" class="btn btn-danger btn-sm text-white" >DELETE</button>
+				</form>
+              </div>
+              
+            </div>  
+          </div>
+      </div>
+
+
+      </div>
+    </section>
+    
+    
+    <footer class="site-footer">
+
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-12">
+            <p class="copyright"><small>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></small></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  
+  </div>
+
+    <!-- SCRIPTS -->
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/isotope.pkgd.min.js}"></script>
+    <script th:src="@{/js/stickyfill.min.js}"></script>
+    <script th:src="@{/js/jquery.fancybox.min.js}"></script>
+    <script th:src="@{/js/jquery.easing.1.3.js}"></script>
+    
+    <script th:src="@{/js/jquery.waypoints.min.js}"></script>
+    <script th:src="@{/js/jquery.animateNumber.min.js}"></script>
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    
+    <script th:src="@{/js/bootstrap-select.min.js}"></script>
+    
+    <script th:src="@{/js/custom.js}"></script>
+
+     
+  </body>
+</html>
