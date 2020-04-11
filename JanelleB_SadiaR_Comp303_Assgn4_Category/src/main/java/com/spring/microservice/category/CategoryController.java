@@ -95,9 +95,10 @@ public class CategoryController {
 	}
 	
 	@GetMapping("/update/{jobCatId}")
-	public String renderUpdate(@PathVariable("jobCatId") int jobCatId, Category category, Model model)
+	public String renderUpdate(@PathVariable("jobCatId") int jobCatId, @ModelAttribute("category")Category category, Model model)
 	{
-		model.addAttribute("jobCatId", jobCatId);
+		category = categoryService.findCategoryById(jobCatId);
+		model.addAttribute("category", category);
 		return "categoryUpdate"; 
 	}
 	
@@ -111,5 +112,4 @@ public class CategoryController {
 	{
 		return "categoryFindById";
 	}
-	
 }
