@@ -56,9 +56,9 @@
               <li class="has-children">
                 <a href="/" class="nav-link active">Organization</a>
                 <ul class="dropdown">
-                  <li><a href="show">List All Organization</a></li>
-                  <li><a href="findById">Find An Organization</a></li>
-                  <li><a href="add">Add Organization</a></li>
+                  <li><a href="/organization/show">List All Organization</a></li>
+                  <li><a href="/organization/findById">Find An Organization</a></li>
+                  <li><a href="/organization/add">Add Organization</a></li>
                 </ul>
               </li>
              <li class="has-children">
@@ -103,7 +103,7 @@
               <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
                   <label class="text-black" for="orgId">Organization ID</label>
-                  <input type="number" id="orgId" name="orgId" class="form-control">
+                  <input type="number" id="orgId" name="orgId" class="form-control" min=1>
                 </div>
               </div>
 
