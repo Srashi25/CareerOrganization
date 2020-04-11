@@ -69,7 +69,7 @@ public class OrganizationController {
 			return mv;
 		}
 		
-		redirect.addFlashAttribute("message", "Organziation not found!");
+		redirect.addFlashAttribute("message", "Organization not found!");
 		mv.setViewName("redirect:/");
 		return mv;
 	}
