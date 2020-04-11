@@ -1697,7 +1697,7 @@ h1, h2, h3, h4 {
 }
 
 .wrap-table100-1 {
-  width: 1080px;
+  width: 1150px;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -1792,7 +1792,7 @@ h1, h2, h3, h4 {
 }
 
 .row-1 .cell-1:nth-child(2) {
-  width: 160px;
+  width: 190px;
 }
 
 .row-1 .cell-1:nth-child(3) {
@@ -1800,7 +1800,7 @@ h1, h2, h3, h4 {
 }
 
 .row-1 .cell-1:nth-child(4) {
-  width: 300px;
+  width: 160px;
 }
 
 .row-1 .cell-1:nth-child(5) {
@@ -1809,6 +1809,17 @@ h1, h2, h3, h4 {
 }
 
 .row-1 .cell-1:nth-child(6) {
+  width: 190px;
+  padding-right: 20px;
+}
+.row-1 .cell-1:nth-child(7) {
+  width: 160px;
+  padding-right: 20px;
+}
+.row-1 .cell-1:nth-child(8) {
+  width: 160px;
+}
+.row-1 .cell-1:nth-child(9) {
   width: 160px;
 }
 
