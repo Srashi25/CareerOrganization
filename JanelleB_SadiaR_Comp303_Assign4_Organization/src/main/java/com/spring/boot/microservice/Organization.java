@@ -33,22 +33,26 @@ public class Organization {
 	@Column(name="orgname")
 	private String orgName;
 	
-	@NotNull(message="Please add address.") // validation
+	@NotNull
+	@NotEmpty(message="Please add address.") // validation
 	@Length (min=10,max=100,message = "Address should be between 10-100 characters.") // validation
 	@Column(name="address")
 	private String address;
 	
+	@NotNull
 	@NotNull(message="Please add postal code.") // validation
 	@Pattern(regexp="^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]●?[0-9][A-Z][0-9]$", message ="Postal code is invalid.") // validation
 	@Column(name="postalcode")
 	private String postalCode;
 	
-	@NotNull(message="Please add phone number.") // validation
+	@NotNull
+	@NotEmpty(message="Please add phone number.") // validation
 	@Pattern(regexp="^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$", message="Phone number is invalid") // validation
 	@Column(name="phoneno")
 	private String phoneNo;
 	
-	@NotNull(message="Please add email.") // validation
+	@NotNull(message="Please add email.") 
+	@NotEmpty(message="Please add email.")// validation
 	@Pattern(regexp="^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$",
 			message="{invalid.email}") // validation
 	@Column(name="email")

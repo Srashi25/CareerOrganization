@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -26,24 +27,28 @@ public class Job {
 	@Column(name="jobid")
 	private int jobId;
 	
-	@NotNull (message = "Job code is required.") // validation
+	@NotNull
+	@NotEmpty (message = "Job code is required.") // validation
 	@Column(name="jobcode")
 	private String jobCode;
 	
-	@NotNull (message = "Job name is required.") // validation
+	@NotNull 
+	@NotEmpty (message = "Job name is required.") // validation
 	@Column(name="jobname")
 	private String jobName;
 	
-	@NotNull (message = "Job description is required.") // validation
+	@NotNull 
+	@NotEmpty (message = "Job description is required.") // validation
 	@Length (min=10,max=200,message = "Job description should be between 10-200 characters.") // validation
 	@Column(name="jobdesc")
 	private String jobDesc;
 	
-	@NotNull (message = "Pulished date is required.") // validation
+	@NotNull
+	@NotEmpty (message = "Pulished date is required.")// validation
 	@Column(name="pubdate")
 	private String pubDate;
 	
-	@NotNull (message = "Number of vacancies is required.") // validation
+	@NotNull 
 	@Column(name="numvacancy")
 	@Digits(integer = 5, fraction = 0, message="Number without fraction required.") // validation
 	private int numVacancy;
