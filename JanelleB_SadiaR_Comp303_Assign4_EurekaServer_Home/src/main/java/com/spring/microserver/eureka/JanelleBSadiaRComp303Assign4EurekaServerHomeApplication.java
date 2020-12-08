@@ -4,10 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
-/**
- * Janelle Baetiong (300966120) and Sadia Rashid (300963357)
- * COMP303 - 001 - Lab Assignment#4
- */
 
 @EnableEurekaServer
 @SpringBootApplication
